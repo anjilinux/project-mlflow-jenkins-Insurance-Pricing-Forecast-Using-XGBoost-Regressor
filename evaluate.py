@@ -6,7 +6,7 @@ df = pd.read_csv("clean_data.csv")
 X = df.drop("charges", axis=1)
 y = df["charges"]
 
-model = joblib.load("artifacts/model.pkl")
+model = joblib.load("model.pkl")
 preds = model.predict(X)
 
 print("MSE:", mean_squared_error(y, preds))

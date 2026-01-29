@@ -33,4 +33,4 @@ with mlflow.start_run():
 
     mlflow.xgboost.log_model(model, "model")
 
-    joblib.dump(model, "artifacts/model.pkl")
+    joblib.dump(model, "model.pkl")
