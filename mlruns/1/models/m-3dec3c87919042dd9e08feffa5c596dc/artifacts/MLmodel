@@ -1,0 +1,22 @@
+artifact_path: /var/lib/jenkins/workspace/XGBOOT-insurence/mlruns/1/models/m-3dec3c87919042dd9e08feffa5c596dc/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.12.3
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBRegressor
+    model_format: ubj
+    xgb_version: 3.1.3
+mlflow_version: 3.9.0
+model_id: m-3dec3c87919042dd9e08feffa5c596dc
+model_size_bytes: 199755
+model_uuid: m-3dec3c87919042dd9e08feffa5c596dc
+prompts: null
+run_id: 19aa732c6c7b47b88dd2146ab1eabde7
+utc_time_created: '2026-01-29 17:46:30.534022'

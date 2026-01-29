@@ -21,6 +21,18 @@ pipeline {
                 '''
             }
         }
+       
+
+        stage('Clean MLflow') {
+            steps {
+                sh '''
+                rm -rf /var/lib/jenkins/mlflow
+                mkdir -p /var/lib/jenkins/mlflow
+                '''
+            }
+        }
+
+
 
         stage('Train Model') {
             steps {
