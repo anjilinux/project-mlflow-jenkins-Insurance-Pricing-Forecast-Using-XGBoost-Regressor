@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh '''
                 . venv/bin/activate
-                python data_preprocessing.py
+                python preprocess.py
                 '''
             }
         }
