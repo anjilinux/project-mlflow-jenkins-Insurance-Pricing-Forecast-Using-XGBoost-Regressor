@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from xgboost import XGBRegressor
 
 mlflow.set_experiment("Insurance_Pricing_XGBoost")
-
+mlflow.set_tracking_uri("http://localhost:5555")
 df = pd.read_csv("clean_data.csv")
 
 X = df.drop("charges", axis=1)
