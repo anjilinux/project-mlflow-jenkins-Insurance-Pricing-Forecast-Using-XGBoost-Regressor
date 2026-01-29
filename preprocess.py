@@ -1,23 +1,15 @@
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-
-
-
+from sklearn.preprocessing import LabelEncoder
 
 def preprocess_data(input_path, output_path):
-df = pd.read_csv(input_path)
+    df = pd.read_csv(input_path)
 
+    le = LabelEncoder()
+    df["smoker"] = le.fit_transform(df["smoker"])
+    df["region"] = le.fit_transform(df["region"])
 
-df = pd.get_dummies(df, drop_first=True)
+    df.to_csv(output_path, index=False)
 
-
-scaler = StandardScaler()
-num_cols = ['age', 'bmi', 'children']
-df[num_cols] = scaler.fit_transform(df[num_cols])
-
-
-df.to_csv(output_path, index=False)
-
-
-if __name__ == '__main__':
-preprocess_data('data/raw/insurance.csv', 'data/processed/clean_data.csv')
+if __name__ == "__main__":
+    preprocess_data("insurance.csv",
+                    "clean_data.csv")

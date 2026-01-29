@@ -1,18 +1,13 @@
-import joblib
 import pandas as pd
-from sklearn.metrics import mean_squared_error
+import joblib
+from sklearn.metrics import mean_squared_error, r2_score
 
+df = pd.read_csv("clean_data.csv")
+X = df.drop("charges", axis=1)
+y = df["charges"]
 
-model = joblib.load('models/model.pkl')
-data = pd.read_csv('data/processed/clean_data.csv')
-
-
-X = data.drop('charges', axis=1)
-y = data['charges']
-
-
+model = joblib.load("artifacts/model.pkl")
 preds = model.predict(X)
-rmse = mean_squared_error(y, preds, squared=False)
 
-
-print(f"RMSE: {rmse}")
+print("MSE:", mean_squared_error(y, preds))
+print("R2 Score:", r2_score(y, preds))

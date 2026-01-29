@@ -1,16 +1,11 @@
 import joblib
-import pandas as pd
+import numpy as np
 
+def test_model_prediction():
+    model = joblib.load("artifacts/model.pkl")
 
+    sample = np.array([[40, 30.0, 2, 0, 1]])
+    prediction = model.predict(sample)
 
-
-def test_model_prediction_shape():
-model = joblib.load('models/model.pkl')
-data = pd.read_csv('data/processed/clean_data.csv')
-
-
-X = data.drop('charges', axis=1)
-preds = model.predict(X)
-
-
-assert len(preds) == len(X)
+    assert prediction.shape[0] == 1
+    assert prediction[0] > 0
