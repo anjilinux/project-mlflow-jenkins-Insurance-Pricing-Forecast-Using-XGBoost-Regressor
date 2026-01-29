@@ -4,7 +4,7 @@ import numpy as np
 def test_model_prediction():
     model = joblib.load("model.pkl")
 
-    sample = np.array([[40, 30.0, 2, 0, 1]])
+    sample = np.array([[40, 30.0, 2, 1, 0, 2]])
     prediction = model.predict(sample)
 
     assert prediction.shape[0] == 1
