@@ -14,6 +14,6 @@ def preprocess_data(input_path, output_path):
 
 if __name__ == "__main__":
     preprocess_data(
-        "data/raw/insurance.csv",
-        "data/processed/clean_data.csv"
+        "insurance.csv",
+        "processed/clean_data.csv"
     )
