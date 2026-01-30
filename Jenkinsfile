@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        MLFLOW_TRACKING_URI = "file:/var/lib/jenkins/mlflow_clean"
+        MLFLOW_TRACKING_URI = "http://localhost:5555"
+        MLFLOW_EXPERIMENT_NAME = "Insurance_Pricing_XGBoost_v07"
     }
 
     stages {
