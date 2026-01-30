@@ -32,6 +32,18 @@ pipeline {
             }
         }
 
+        stage('Nuke MLflow State') {
+            steps {
+                sh '''
+                rm -rf /var/lib/jenkins/mlflow_clean
+                rm -rf /var/lib/jenkins/mlruns
+                rm -rf ~/.mlflow
+                rm -rf ~/.cache/mlflow
+                rm -rf mlruns
+                mkdir -p /var/lib/jenkins/mlflow_clean
+                '''
+            }
+        }
 
 
         stage('Train Model') {

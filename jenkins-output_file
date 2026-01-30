@@ -1,0 +1,326 @@
+Started by user anjireddy-jenkins
+
+Obtained Jenkinsfile from git https://github.com/anjilinux/project-mlflow-jenkins-Insurance-Pricing-Forecast-Using-XGBoost-Regressor.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins
+ in /var/lib/jenkins/workspace/XGBOOT-insurence
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/XGBOOT-insurence/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/anjilinux/project-mlflow-jenkins-Insurance-Pricing-Forecast-Using-XGBoost-Regressor.git # timeout=10
+Fetching upstream changes from https://github.com/anjilinux/project-mlflow-jenkins-Insurance-Pricing-Forecast-Using-XGBoost-Regressor.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/anjilinux/project-mlflow-jenkins-Insurance-Pricing-Forecast-Using-XGBoost-Regressor.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 5b68a2f91c240f6e870295c9123fe5ff6285f60e (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 5b68a2f91c240f6e870295c9123fe5ff6285f60e # timeout=10
+Commit message: "added"
+ > git rev-list --no-walk 07a6a2b7487ab20094b8875accced27a6effdc37 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Setup Environment)
+[Pipeline] sh
++ python3 -m venv venv
++ . venv/bin/activate
++ deactivate nondestructive
++ [ -n  ]
++ [ -n  ]
++ hash -r
++ [ -n  ]
++ unset VIRTUAL_ENV
++ unset VIRTUAL_ENV_PROMPT
++ [ ! nondestructive = nondestructive ]
++ [  = cygwin ]
++ [  = msys ]
++ export VIRTUAL_ENV=/var/lib/jenkins/workspace/XGBOOT-insurence/venv
++ _OLD_VIRTUAL_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/snap/bin
++ PATH=/var/lib/jenkins/workspace/XGBOOT-insurence/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/snap/bin
++ export PATH
++ [ -n  ]
++ [ -z  ]
++ _OLD_VIRTUAL_PS1=$ 
++ PS1=(venv) $ 
++ export PS1
++ VIRTUAL_ENV_PROMPT=(venv) 
++ export VIRTUAL_ENV_PROMPT
++ hash -r
++ pip install -r requirements.txt
+Requirement already satisfied: pandas in ./venv/lib/python3.12/site-packages (from -r requirements.txt (line 1)) (2.3.3)
+Requirement already satisfied: numpy in ./venv/lib/python3.12/site-packages (from -r requirements.txt (line 2)) (2.4.1)
+Requirement already satisfied: scikit-learn in ./venv/lib/python3.12/site-packages (from -r requirements.txt (line 3)) (1.8.0)
+Requirement already satisfied: xgboost in ./venv/lib/python3.12/site-packages (from -r requirements.txt (line 4)) (3.1.3)
+Requirement already satisfied: mlflow in ./venv/lib/python3.12/site-packages (from -r requirements.txt (line 5)) (3.9.0)
+Requirement already satisfied: joblib in ./venv/lib/python3.12/site-packages (from -r requirements.txt (line 6)) (1.5.3)
+Requirement already satisfied: pytest in ./venv/lib/python3.12/site-packages (from -r requirements.txt (line 7)) (9.0.2)
+Requirement already satisfied: python-dateutil>=2.8.2 in ./venv/lib/python3.12/site-packages (from pandas->-r requirements.txt (line 1)) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in ./venv/lib/python3.12/site-packages (from pandas->-r requirements.txt (line 1)) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in ./venv/lib/python3.12/site-packages (from pandas->-r requirements.txt (line 1)) (2025.3)
+Requirement already satisfied: scipy>=1.10.0 in ./venv/lib/python3.12/site-packages (from scikit-learn->-r requirements.txt (line 3)) (1.17.0)
+Requirement already satisfied: threadpoolctl>=3.2.0 in ./venv/lib/python3.12/site-packages (from scikit-learn->-r requirements.txt (line 3)) (3.6.0)
+Requirement already satisfied: nvidia-nccl-cu12 in ./venv/lib/python3.12/site-packages (from xgboost->-r requirements.txt (line 4)) (2.29.2)
+Requirement already satisfied: mlflow-skinny==3.9.0 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (3.9.0)
+Requirement already satisfied: mlflow-tracing==3.9.0 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (3.9.0)
+Requirement already satisfied: Flask-CORS<7 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (6.0.2)
+Requirement already satisfied: Flask<4 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (3.1.2)
+Requirement already satisfied: alembic!=1.10.0,<2 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (1.18.2)
+Requirement already satisfied: cryptography<47,>=43.0.0 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (46.0.4)
+Requirement already satisfied: docker<8,>=4.0.0 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (7.1.0)
+Requirement already satisfied: graphene<4 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (3.4.3)
+Requirement already satisfied: gunicorn<24 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (23.0.0)
+Requirement already satisfied: huey<3,>=2.5.4 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (2.6.0)
+Requirement already satisfied: matplotlib<4 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (3.10.8)
+Requirement already satisfied: pyarrow<23,>=4.0.0 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (22.0.0)
+Requirement already satisfied: skops<1 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (0.13.0)
+Requirement already satisfied: sqlalchemy<3,>=1.4.0 in ./venv/lib/python3.12/site-packages (from mlflow->-r requirements.txt (line 5)) (2.0.46)
+Requirement already satisfied: cachetools<7,>=5.0.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (6.2.6)
+Requirement already satisfied: click<9,>=7.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (8.3.1)
+Requirement already satisfied: cloudpickle<4 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (3.1.2)
+Requirement already satisfied: databricks-sdk<1,>=0.20.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.82.0)
+Requirement already satisfied: fastapi<1 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.128.0)
+Requirement already satisfied: gitpython<4,>=3.1.9 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (3.1.46)
+Requirement already satisfied: importlib_metadata!=4.7.0,<9,>=3.7.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (8.7.1)
+Requirement already satisfied: opentelemetry-api<3,>=1.9.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (1.39.1)
+Requirement already satisfied: opentelemetry-proto<3,>=1.9.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (1.39.1)
+Requirement already satisfied: opentelemetry-sdk<3,>=1.9.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (1.39.1)
+Requirement already satisfied: packaging<26 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (25.0)
+Requirement already satisfied: protobuf<7,>=3.12.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (6.33.4)
+Requirement already satisfied: pydantic<3,>=2.0.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (2.12.5)
+Requirement already satisfied: python-dotenv<2,>=0.19.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (1.2.1)
+Requirement already satisfied: pyyaml<7,>=5.1 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (6.0.3)
+Requirement already satisfied: requests<3,>=2.17.3 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (2.32.5)
+Requirement already satisfied: sqlparse<1,>=0.4.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.5.5)
+Requirement already satisfied: typing-extensions<5,>=4.0.0 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (4.15.0)
+Requirement already satisfied: uvicorn<1 in ./venv/lib/python3.12/site-packages (from mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.40.0)
+Requirement already satisfied: iniconfig>=1.0.1 in ./venv/lib/python3.12/site-packages (from pytest->-r requirements.txt (line 7)) (2.3.0)
+Requirement already satisfied: pluggy<2,>=1.5 in ./venv/lib/python3.12/site-packages (from pytest->-r requirements.txt (line 7)) (1.6.0)
+Requirement already satisfied: pygments>=2.7.2 in ./venv/lib/python3.12/site-packages (from pytest->-r requirements.txt (line 7)) (2.19.2)
+Requirement already satisfied: Mako in ./venv/lib/python3.12/site-packages (from alembic!=1.10.0,<2->mlflow->-r requirements.txt (line 5)) (1.3.10)
+Requirement already satisfied: cffi>=2.0.0 in ./venv/lib/python3.12/site-packages (from cryptography<47,>=43.0.0->mlflow->-r requirements.txt (line 5)) (2.0.0)
+Requirement already satisfied: urllib3>=1.26.0 in ./venv/lib/python3.12/site-packages (from docker<8,>=4.0.0->mlflow->-r requirements.txt (line 5)) (2.6.3)
+Requirement already satisfied: blinker>=1.9.0 in ./venv/lib/python3.12/site-packages (from Flask<4->mlflow->-r requirements.txt (line 5)) (1.9.0)
+Requirement already satisfied: itsdangerous>=2.2.0 in ./venv/lib/python3.12/site-packages (from Flask<4->mlflow->-r requirements.txt (line 5)) (2.2.0)
+Requirement already satisfied: jinja2>=3.1.2 in ./venv/lib/python3.12/site-packages (from Flask<4->mlflow->-r requirements.txt (line 5)) (3.1.6)
+Requirement already satisfied: markupsafe>=2.1.1 in ./venv/lib/python3.12/site-packages (from Flask<4->mlflow->-r requirements.txt (line 5)) (3.0.3)
+Requirement already satisfied: werkzeug>=3.1.0 in ./venv/lib/python3.12/site-packages (from Flask<4->mlflow->-r requirements.txt (line 5)) (3.1.5)
+Requirement already satisfied: graphql-core<3.3,>=3.1 in ./venv/lib/python3.12/site-packages (from graphene<4->mlflow->-r requirements.txt (line 5)) (3.2.7)
+Requirement already satisfied: graphql-relay<3.3,>=3.1 in ./venv/lib/python3.12/site-packages (from graphene<4->mlflow->-r requirements.txt (line 5)) (3.2.0)
+Requirement already satisfied: contourpy>=1.0.1 in ./venv/lib/python3.12/site-packages (from matplotlib<4->mlflow->-r requirements.txt (line 5)) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in ./venv/lib/python3.12/site-packages (from matplotlib<4->mlflow->-r requirements.txt (line 5)) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in ./venv/lib/python3.12/site-packages (from matplotlib<4->mlflow->-r requirements.txt (line 5)) (4.61.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in ./venv/lib/python3.12/site-packages (from matplotlib<4->mlflow->-r requirements.txt (line 5)) (1.4.9)
+Requirement already satisfied: pillow>=8 in ./venv/lib/python3.12/site-packages (from matplotlib<4->mlflow->-r requirements.txt (line 5)) (12.1.0)
+Requirement already satisfied: pyparsing>=3 in ./venv/lib/python3.12/site-packages (from matplotlib<4->mlflow->-r requirements.txt (line 5)) (3.3.2)
+Requirement already satisfied: six>=1.5 in ./venv/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas->-r requirements.txt (line 1)) (1.17.0)
+Requirement already satisfied: prettytable>=3.9 in ./venv/lib/python3.12/site-packages (from skops<1->mlflow->-r requirements.txt (line 5)) (3.17.0)
+Requirement already satisfied: greenlet>=1 in ./venv/lib/python3.12/site-packages (from sqlalchemy<3,>=1.4.0->mlflow->-r requirements.txt (line 5)) (3.3.1)
+Requirement already satisfied: pycparser in ./venv/lib/python3.12/site-packages (from cffi>=2.0.0->cryptography<47,>=43.0.0->mlflow->-r requirements.txt (line 5)) (3.0)
+Requirement already satisfied: google-auth~=2.0 in ./venv/lib/python3.12/site-packages (from databricks-sdk<1,>=0.20.0->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (2.48.0)
+Requirement already satisfied: starlette<0.51.0,>=0.40.0 in ./venv/lib/python3.12/site-packages (from fastapi<1->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.50.0)
+Requirement already satisfied: annotated-doc>=0.0.2 in ./venv/lib/python3.12/site-packages (from fastapi<1->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.0.4)
+Requirement already satisfied: gitdb<5,>=4.0.1 in ./venv/lib/python3.12/site-packages (from gitpython<4,>=3.1.9->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (4.0.12)
+Requirement already satisfied: zipp>=3.20 in ./venv/lib/python3.12/site-packages (from importlib_metadata!=4.7.0,<9,>=3.7.0->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (3.23.0)
+Requirement already satisfied: opentelemetry-semantic-conventions==0.60b1 in ./venv/lib/python3.12/site-packages (from opentelemetry-sdk<3,>=1.9.0->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.60b1)
+Requirement already satisfied: wcwidth in ./venv/lib/python3.12/site-packages (from prettytable>=3.9->skops<1->mlflow->-r requirements.txt (line 5)) (0.5.0)
+Requirement already satisfied: annotated-types>=0.6.0 in ./venv/lib/python3.12/site-packages (from pydantic<3,>=2.0.0->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.7.0)
+Requirement already satisfied: pydantic-core==2.41.5 in ./venv/lib/python3.12/site-packages (from pydantic<3,>=2.0.0->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (2.41.5)
+Requirement already satisfied: typing-inspection>=0.4.2 in ./venv/lib/python3.12/site-packages (from pydantic<3,>=2.0.0->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.4.2)
+Requirement already satisfied: charset_normalizer<4,>=2 in ./venv/lib/python3.12/site-packages (from requests<3,>=2.17.3->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (3.4.4)
+Requirement already satisfied: idna<4,>=2.5 in ./venv/lib/python3.12/site-packages (from requests<3,>=2.17.3->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (3.11)
+Requirement already satisfied: certifi>=2017.4.17 in ./venv/lib/python3.12/site-packages (from requests<3,>=2.17.3->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (2026.1.4)
+Requirement already satisfied: h11>=0.8 in ./venv/lib/python3.12/site-packages (from uvicorn<1->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.16.0)
+Requirement already satisfied: smmap<6,>=3.0.1 in ./venv/lib/python3.12/site-packages (from gitdb<5,>=4.0.1->gitpython<4,>=3.1.9->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (5.0.2)
+Requirement already satisfied: pyasn1-modules>=0.2.1 in ./venv/lib/python3.12/site-packages (from google-auth~=2.0->databricks-sdk<1,>=0.20.0->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.4.2)
+Requirement already satisfied: rsa<5,>=3.1.4 in ./venv/lib/python3.12/site-packages (from google-auth~=2.0->databricks-sdk<1,>=0.20.0->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (4.9.1)
+Requirement already satisfied: anyio<5,>=3.6.2 in ./venv/lib/python3.12/site-packages (from starlette<0.51.0,>=0.40.0->fastapi<1->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (4.12.1)
+Requirement already satisfied: pyasn1<0.7.0,>=0.6.1 in ./venv/lib/python3.12/site-packages (from pyasn1-modules>=0.2.1->google-auth~=2.0->databricks-sdk<1,>=0.20.0->mlflow-skinny==3.9.0->mlflow->-r requirements.txt (line 5)) (0.6.2)
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Data Preprocessing)
+[Pipeline] sh
++ . venv/bin/activate
++ deactivate nondestructive
++ [ -n  ]
++ [ -n  ]
++ hash -r
++ [ -n  ]
++ unset VIRTUAL_ENV
++ unset VIRTUAL_ENV_PROMPT
++ [ ! nondestructive = nondestructive ]
++ [  = cygwin ]
++ [  = msys ]
++ export VIRTUAL_ENV=/var/lib/jenkins/workspace/XGBOOT-insurence/venv
++ _OLD_VIRTUAL_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/snap/bin
++ PATH=/var/lib/jenkins/workspace/XGBOOT-insurence/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/snap/bin
++ export PATH
++ [ -n  ]
++ [ -z  ]
++ _OLD_VIRTUAL_PS1=$ 
++ PS1=(venv) $ 
++ export PS1
++ VIRTUAL_ENV_PROMPT=(venv) 
++ export VIRTUAL_ENV_PROMPT
++ hash -r
++ python preprocess.py
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Train Model)
+[Pipeline] sh
++ . venv/bin/activate
++ deactivate nondestructive
++ [ -n  ]
++ [ -n  ]
++ hash -r
++ [ -n  ]
++ unset VIRTUAL_ENV
++ unset VIRTUAL_ENV_PROMPT
++ [ ! nondestructive = nondestructive ]
++ [  = cygwin ]
++ [  = msys ]
++ export VIRTUAL_ENV=/var/lib/jenkins/workspace/XGBOOT-insurence/venv
++ _OLD_VIRTUAL_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/snap/bin
++ PATH=/var/lib/jenkins/workspace/XGBOOT-insurence/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/snap/bin
++ export PATH
++ [ -n  ]
++ [ -z  ]
++ _OLD_VIRTUAL_PS1=$ 
++ PS1=(venv) $ 
++ export PS1
++ VIRTUAL_ENV_PROMPT=(venv) 
++ export VIRTUAL_ENV_PROMPT
++ hash -r
++ python train.py
+2026/01/29 23:23:35 INFO alembic.runtime.plugins: setup plugin alembic.autogenerate.schemas
+2026/01/29 23:23:35 INFO alembic.runtime.plugins: setup plugin alembic.autogenerate.tables
+2026/01/29 23:23:35 INFO alembic.runtime.plugins: setup plugin alembic.autogenerate.types
+2026/01/29 23:23:35 INFO alembic.runtime.plugins: setup plugin alembic.autogenerate.constraints
+2026/01/29 23:23:35 INFO alembic.runtime.plugins: setup plugin alembic.autogenerate.defaults
+2026/01/29 23:23:35 INFO alembic.runtime.plugins: setup plugin alembic.autogenerate.comments
+2026/01/29 23:23:35 INFO alembic.runtime.migration: Context impl SQLiteImpl.
+2026/01/29 23:23:35 INFO alembic.runtime.migration: Will assume non-transactional DDL.
+2026/01/29 23:23:37 WARNING mlflow.models.model: `artifact_path` is deprecated. Please use `name` instead.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Evaluate Model)
+[Pipeline] sh
++ . venv/bin/activate
++ deactivate nondestructive
++ [ -n  ]
++ [ -n  ]
++ hash -r
++ [ -n  ]
++ unset VIRTUAL_ENV
++ unset VIRTUAL_ENV_PROMPT
++ [ ! nondestructive = nondestructive ]
++ [  = cygwin ]
++ [  = msys ]
++ export VIRTUAL_ENV=/var/lib/jenkins/workspace/XGBOOT-insurence/venv
++ _OLD_VIRTUAL_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/snap/bin
++ PATH=/var/lib/jenkins/workspace/XGBOOT-insurence/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/snap/bin
++ export PATH
++ [ -n  ]
++ [ -z  ]
++ _OLD_VIRTUAL_PS1=$ 
++ PS1=(venv) $ 
++ export PS1
++ VIRTUAL_ENV_PROMPT=(venv) 
++ export VIRTUAL_ENV_PROMPT
++ hash -r
++ python evaluate.py
+MSE: 22964223.701322086
+R2 Score: 0.692640738254326
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test Model)
+[Pipeline] sh
++ . venv/bin/activate
++ deactivate nondestructive
++ [ -n  ]
++ [ -n  ]
++ hash -r
++ [ -n  ]
++ unset VIRTUAL_ENV
++ unset VIRTUAL_ENV_PROMPT
++ [ ! nondestructive = nondestructive ]
++ [  = cygwin ]
++ [  = msys ]
++ export VIRTUAL_ENV=/var/lib/jenkins/workspace/XGBOOT-insurence/venv
++ _OLD_VIRTUAL_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/snap/bin
++ PATH=/var/lib/jenkins/workspace/XGBOOT-insurence/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/snap/bin
++ export PATH
++ [ -n  ]
++ [ -z  ]
++ _OLD_VIRTUAL_PS1=$ 
++ PS1=(venv) $ 
++ export PS1
++ VIRTUAL_ENV_PROMPT=(venv) 
++ export VIRTUAL_ENV_PROMPT
++ hash -r
++ pytest test_model.py
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.2, pluggy-1.6.0
+rootdir: /var/lib/jenkins/workspace/XGBOOT-insurence
+plugins: anyio-4.12.1
+collected 1 item
+
+test_model.py .                                                          [100%]
+
+============================== 1 passed in 1.81s ===============================
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+org.jenkinsci.plugins.scriptsecurity.scripts.UnapprovedUsageException: script not yet approved for use
+	at PluginClassLoader for script-security//org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval.using(ScriptApproval.java:695)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:98)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1225)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1034)
+	at org.codehaus.groovy.runtime.callsite.PojoMetaClassSite.call(PojoMetaClassSite.java:46)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:136)
+	at PluginClassLoader for splunk-devops//com.splunk.splunkjenkins.UserActionDSL.perform(UserActionDSL.groovy:39)
+	at PluginClassLoader for splunk-devops//com.splunk.splunkjenkins.listeners.LoggingRunListener.onCompleted(LoggingRunListener.java:85)
+	at hudson.model.listeners.RunListener.lambda$fireCompleted$1(RunListener.java:234)
+	at jenkins.util.Listeners.lambda$notify$0(Listeners.java:59)
+	at jenkins.util.Listeners.notify(Listeners.java:67)
+	at hudson.model.listeners.RunListener.fireCompleted(RunListener.java:232)
+	at PluginClassLoader for workflow-job//org.jenkinsci.plugins.workflow.job.WorkflowRun.finish(WorkflowRun.java:662)
+	at PluginClassLoader for workflow-job//org.jenkinsci.plugins.workflow.job.WorkflowRun$GraphL.onNewHead(WorkflowRun.java:1081)
+	at PluginClassLoader for workflow-cps//org.jenkinsci.plugins.workflow.cps.CpsFlowExecution.notifyListeners(CpsFlowExecution.java:1655)
+	at PluginClassLoader for workflow-cps//org.jenkinsci.plugins.workflow.cps.CpsThreadGroup$3.run(CpsThreadGroup.java:568)
+	at PluginClassLoader for workflow-cps//org.jenkinsci.plugins.workflow.cps.CpsVmExecutorService.lambda$wrap$2(CpsVmExecutorService.java:81)
+	at hudson.remoting.SingleLaneExecutorService$1.run(SingleLaneExecutorService.java:139)
+	at jenkins.util.ContextResettingExecutorService$1.run(ContextResettingExecutorService.java:28)
+	at jenkins.security.ImpersonatingExecutorService$1.run(ImpersonatingExecutorService.java:68)
+	at jenkins.util.ErrorLoggingExecutorService.lambda$wrap$0(ErrorLoggingExecutorService.java:51)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at PluginClassLoader for workflow-cps//org.jenkinsci.plugins.workflow.cps.CpsVmExecutorService$1.call(CpsVmExecutorService.java:53)
+	at PluginClassLoader for workflow-cps//org.jenkinsci.plugins.workflow.cps.CpsVmExecutorService$1.call(CpsVmExecutorService.java:50)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:136)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:275)
+	at PluginClassLoader for workflow-cps//org.jenkinsci.plugins.workflow.cps.CpsVmExecutorService.lambda$categoryThreadFactory$0(CpsVmExecutorService.java:50)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Finished: SUCCESS

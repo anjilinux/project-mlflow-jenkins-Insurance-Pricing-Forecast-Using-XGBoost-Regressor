@@ -5,8 +5,8 @@ import mlflow.xgboost
 from sklearn.model_selection import train_test_split
 from xgboost import XGBRegressor
 
-mlflow.set_experiment("Insurance_Pricing_XGBoost_v57")
-mlflow.set_tracking_uri("http://localhost:5555")
+mlflow.set_experiment("Insurance_Pricing_XGBoost_v07")
+mlflow.set_tracking_uri("file:/var/lib/jenkins/mlflow_clean")
 df = pd.read_csv("clean_data.csv")
 
 X = df.drop("charges", axis=1)
