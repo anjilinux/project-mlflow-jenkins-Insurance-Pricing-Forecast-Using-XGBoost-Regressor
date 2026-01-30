@@ -7,7 +7,8 @@ from sklearn.model_selection import train_test_split
 from xgboost import XGBRegressor
 
 # 🔑 ALWAYS set tracking URI FIRST
-mlflow.set_tracking_uri("file:/var/lib/jenkins/mlflow_clean")
+mlflow.set_tracking_uri("http://localhost:5555")
+#mlflow.set_tracking_uri("file:/var/lib/jenkins/mlflow_clean")
 
 # 🔑 THEN set experiment
 mlflow.set_experiment("Insurance_Pricing_XGBoost_v07")
