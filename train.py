@@ -2,11 +2,16 @@ import pandas as pd
 import joblib
 import mlflow
 import mlflow.xgboost
+import os
 from sklearn.model_selection import train_test_split
 from xgboost import XGBRegressor
 
-mlflow.set_experiment("Insurance_Pricing_XGBoost_v07")
+# 🔑 ALWAYS set tracking URI FIRST
 mlflow.set_tracking_uri("file:/var/lib/jenkins/mlflow_clean")
+
+# 🔑 THEN set experiment
+mlflow.set_experiment("Insurance_Pricing_XGBoost_v07")
+
 df = pd.read_csv("clean_data.csv")
 
 X = df.drop("charges", axis=1)
@@ -32,5 +37,4 @@ with mlflow.start_run():
     })
 
     mlflow.xgboost.log_model(model, "model")
-
     joblib.dump(model, "model.pkl")

@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        MLFLOW_TRACKING_URI = "file:/var/lib/jenkins/mlflow_clean"
+    }
+
     stages {
 
         stage('Setup Environment') {
@@ -22,15 +26,6 @@ pipeline {
             }
         }
        
-
-        stage('Clean MLflow') {
-            steps {
-                sh '''
-                rm -rf /var/lib/jenkins/mlflow
-                mkdir -p /var/lib/jenkins/mlflow
-                '''
-            }
-        }
 
         stage('Nuke MLflow State') {
             steps {
